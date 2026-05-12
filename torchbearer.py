@@ -2,8 +2,8 @@
 CS 460 – Algorithms: Final Programming Assignment
 The Torchbearer
 
-Student Name: ___________________________
-Student ID:   ___________________________
+Student Name: Zakaria Abdullahi
+Student ID:   820007650
 
 INSTRUCTIONS
 ------------
@@ -31,10 +31,15 @@ def explain_problem():
     str
         Your Part 1 README answers, written as a string.
         Must match what you wrote in README Part 1.
-
-    TODO
     """
-    return "TODO"
+    return """ 
+    A single shortest-path from S gives the cheapest path to each individual node, but the problem requires
+        visiting all relics/nodes and then reaching the exit, meaning we need a full route.  
+    Deciding in which order to visist the relics/nodes. Traversing in different orders produce different results 
+         and we want the minimum overall cost.     
+    Because the total cost depends on the sequence of relic/node visits, we must explore different possible orders
+        to determine the minimum overall cost.
+    """
 
 
 # =============================================================================
@@ -53,10 +58,16 @@ def select_sources(spawn, relics, exit_node):
     -------
     list[node]
         No duplicates. Order does not matter.
-
-    TODO
     """
-    pass
+    sources = []
+    seen = set()
+
+    for node in [spawn] + list(relics):
+        if node not in seen:
+            sources.append(node)
+            seen.add(node)
+
+    return sources
 
 
 def run_dijkstra(graph, source):

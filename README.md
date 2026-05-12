@@ -1,7 +1,7 @@
 # The Torchbearer
 
-**Student Name:** ___________________________
-**Student ID:** ___________________________
+**Student Name:** Zakaria Abdullahi
+**Student ID:** 820007650
 **Course:** CS 460 – Algorithms | Spring 2026
 
 > This README is your project documentation. Write it the way a developer would document
@@ -17,13 +17,16 @@
 > per question. Each bullet should be 1-2 sentences max.
 
 - **Why a single shortest-path run from S is not enough:**
-  _Your answer here._
+  A single shortest-path from S gives the cheapest path to each individual node, but the problem requires
+  visiting all relics/nodes and then reaching the exit, meaning we need a full route.
 
 - **What decision remains after all inter-location costs are known:**
-  _Your answer here._
+  Deciding in which order to visist the relics/nodes. Traversing in different orders produce different results 
+  and we want the minimum overall cost.
 
 - **Why this requires a search over orders (one sentence):**
-  _Your answer here._
+  Because the total cost depends on the sequence of relic/node visits, we must explore different possible orders
+  to determine the minimum overall cost.
 
 ---
 
@@ -35,8 +38,8 @@
 
 | Source Node Type | Why it is a source |
 |---|---|
-| _node type_ | _one-line reason_ |
-| _node type_ | _one-line reason_ |
+| _S_ | _The route begins at S, so we need the shortest path from S to all relavent nodes_ |
+| _relic chambers_| _After visiting each relic, the next step starts at that relic to others and the exit_ | 
 
 ### Part 2b: Distance Storage
 
