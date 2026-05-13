@@ -19,12 +19,12 @@ _I plan to full read through the assignment and all its files to carefully under
 
 ---
 
-## Entry 2 – [Date]: [Short description]
+## Entry 2 – [4/12/26 ~ 10pm]: [Worked through part 2]
 
 > Required. At least one entry must describe a bug, wrong assumption, or design change
 > you encountered. Describe what went wrong and how you resolved it.
 
-_Your entry here._
+_While attempting to test my code for part 2, I ran into bugs given that I still haven't completed the solve() method being called in the test functions. To work around this, I commented the test code out, and manually entered some test data and used print() to test those functions._
 
 ---
 

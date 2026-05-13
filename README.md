@@ -47,20 +47,20 @@
 
 | Property | Your answer |
 |---|---|
-| Data structure name | |
-| What the keys represent | |
-| What the values represent | |
-| Lookup time complexity | |
-| Why O(1) lookup is possible | |
+| Data structure name | Nested dictionary |
+| What the keys represent | Outer key represents source node u, inner key represents destination node v |
+| What the values represent | Shortest-path distance from u to v|
+| Lookup time complexity | O(1) |
+| Why O(1) lookup is possible | Dictionaries use hashing, allowing for constant time key access|
 
 ### Part 2c: Precomputation Complexity
 
 > State the total complexity and show the arithmetic. Two to three lines max.
 
-- **Number of Dijkstra runs:** _your answer_
-- **Cost per run:** _your answer_
-- **Total complexity:** _your answer_
-- **Justification (one line):** _your answer_
+- **Number of Dijkstra runs:** _k+1_
+- **Cost per run:** _O((V + E) log V)_
+- **Total complexity:** _O((k + 1)(V + E) log V)_
+- **Justification (one line):** _Run Dijkstra once from each source (spawn + each relic), and each costs O((V + E) log V)_
 
 ---
 
