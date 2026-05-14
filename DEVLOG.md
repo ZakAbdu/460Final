@@ -28,9 +28,9 @@ _While attempting to test my code for part 2, I ran into bugs given that I still
 
 ---
 
-## Entry 3 – [Date]: [Short description]
+## Entry 3 – [4/13/26 ~ 10pm]: [Worked through part 3 and some of part 4]
 
-_Your entry here._
+_Continued on from where I left off. Used notebook and pencil to trace out algorithm and the questions asked. Went over loop invariants notes again to clearly lay out our terms here. Also worked through a greedy solution and why that fails._
 
 ---
 

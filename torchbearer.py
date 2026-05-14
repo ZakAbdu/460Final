@@ -145,9 +145,17 @@ def dijkstra_invariant_check():
         Your Part 3 README answers, written as a string.
         Must match what you wrote in README Part 3.
 
-    TODO
     """
-    return "TODO"
+    return """
+        3A.) For nodes already finalized, their stored distance is the true cheapest distance from the source.
+             For nodes not yet finalized, their stored distance is the current best known distance using paths that go through finalized nodes first.
+
+        3B.) Initialization: The source starts with distance 0 becuase it costs nothing to reach itself. All other nodes start at infinity because no path has been found yet.
+             Maintenance: Dijkstra chooses the unfinished node with the smallest known distance. Since all edge weights are nonnegative, any alternate path through another unfinished node cannot be cheaper later.
+             Termination: When the algorithm finishes, every reachable finalized node has it's true shortest-path distance from the source. Unreachable nodes remain at infinity.
+
+        3C.) Correct Dijkstra distances make the route planner compare relic orders using true minimum travel costs, so it's final route decision is based on those correct numbers.
+    """
 
 
 # =============================================================================
@@ -162,9 +170,16 @@ def explain_search():
         Your Part 4 README answers, written as a string.
         Must match what you wrote in README Part 4.
 
-    TODO
     """
-    return "TODO"
+    return """
+        The failure mode: Greedy can pick the nearest next relic, but the local choice may force a more expensive path later.
+        Counter-example setup: Consider our graph example with source node S, exit node T, and relic nodes B,C, D. S->B=1, S->C=2, S->D=2, B->D=1, D->C=1, C->T=1, C->B=1, D->T=100.
+        What greedy picks: Greedy starts at S and picks B first because S->B has a cost of 1 which is cheaper than our other options, S->C and S->D, which both have a cost of 2. It can then go from B->D->C->T for a total cost of 4.
+        What optimal picks: The optimal route may opt to choose an order based on the whole remaining route, not just the nearest next relic.
+        Why greedy loses: Greedy only minimizes the next step, while the problem needs the minimum total route across all relics and our exit.
+
+        The algorithm must explore each possible order of relic vists because the total fuel cost depends on the routes order.
+    """
 
 
 # =============================================================================
