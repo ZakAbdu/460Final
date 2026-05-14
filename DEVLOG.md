@@ -34,7 +34,12 @@ _Continued on from where I left off. Used notebook and pencil to trace out algor
 
 ---
 
-## Entry 4 – [Date]: Post-Implementation Reflection
+## Entry 4 – [4/14/26 ~ 12pm]: [Worked through part 5]
+
+_Continued on from where I left off. Found a very useful backtracking refrence online that simplified a choose-explore-backtrack method that I implemented for our problem here._
+
+---
+## Entry 5 – [Date]: Post-Implementation Reflection
 
 > Required. Written after your implementation is complete. Describe what you would
 > change or improve given more time.

@@ -203,10 +203,38 @@ def find_optimal_route(dist_table, spawn, relics, exit_node):
     tuple[float, list[node]]
         (minimum_fuel_cost, ordered_relic_list)
         Returns (float('inf'), []) if no valid route exists.
-
-    TODO
     """
-    pass
+    def backtrack(current_node, collected_relics, fuel_cost, ordered_relic_list):
+        if len(collected_relics) == len(relics):
+            total_cost = fuel_cost + dist_table[current_node][exit_node]
+            return total_cost, ordered_relic_list.copy()
+        
+        best_cost = float('inf')
+        best_order = []
+
+        for relic in relics:
+            if relic not in collected_relics:
+
+                 # choose
+                collected_relics.add(relic)
+                ordered_relic_list.append(relic)
+
+                # explore
+                route_cost, route_order = backtrack(relic, collected_relics, fuel_cost + dist_table[current_node][relic], ordered_relic_list)
+
+                if route_cost < best_cost:
+                    best_cost = route_cost
+                    best_order = route_order
+                    
+                #backtrack
+                ordered_relic_list.pop()
+                collected_relics.remove(relic)
+
+        return best_cost, best_order
+    
+    return backtrack(spawn, set(), 0, [])
+
+
 
 
 def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,

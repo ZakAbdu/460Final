@@ -131,9 +131,9 @@ _Correct Dijkstra distances make the route planner compare relic orders using tr
 
 | Component | Variable name in code | Data type | Description |
 |---|---|---|---|
-| Current location | | | |
-| Relics already collected | | | |
-| Fuel cost so far | | | |
+| Current location | current_node | node | Node where the route is currently at. |
+| Relics already collected | collected_relics | set[node] | The relic nodes already visited on the route. |
+| Fuel cost so far | fuel_cost | float | Total distance/fuel used so far |
 
 ### Part 5b: Data Structure for Visited Relics
 
@@ -141,18 +141,18 @@ _Correct Dijkstra distances make the route planner compare relic orders using tr
 
 | Property | Your answer |
 |---|---|
-| Data structure chosen | |
-| Operation: check if relic already collected | Time complexity: |
-| Operation: mark a relic as collected | Time complexity: |
-| Operation: unmark a relic (backtrack) | Time complexity: |
-| Why this structure fits | |
+| Data structure chosen | set |
+| Operation: check if relic already collected | Time complexity: O(1) |
+| Operation: mark a relic as collected | Time complexity: O(1) |
+| Operation: unmark a relic (backtrack) | Time complexity: O(1) |
+| Why this structure fits | A set lets us quickly if a relic is already in the set, add relics, and remove relics while exploring other routes. |
 
 ### Part 5c: Worst-Case Search Space
 
 > Two bullets.
 
-- **Worst-case number of orders considered:** _Your answer (in terms of k)._
-- **Why:** _One-line justification._
+- **Worst-case number of orders considered:** _k!_
+- **Why:** _In the worst case, the algorithm may need to try every possible ordering of k relics._
 
 ---
 
@@ -186,4 +186,4 @@ _Correct Dijkstra distances make the route planner compare relic orders using tr
 
 > Bullet list. If none beyond lecture notes, write that.
 
-- _Your references here._
+- _Backtracking refrence: https://medium.com/@albertoarrigoni/the-choose-explore-unchoose-pattern-for-backtracking-c0a519a3c2e8_
