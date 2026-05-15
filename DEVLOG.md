@@ -39,27 +39,27 @@ _Continued on from where I left off. Used notebook and pencil to trace out algor
 _Continued on from where I left off. Found a very useful backtracking refrence online that simplified a choose-explore-backtrack method that I implemented for our problem here._
 
 ---
-## Entry 5 – [Date]: Post-Implementation Reflection
+## Entry 5 – [4/14/26 ~ 10pm]: Post-Implementation Reflection
 
 > Required. Written after your implementation is complete. Describe what you would
 > change or improve given more time.
 
-_Your entry here._
+_I would possibly improve my findOptimalRoute function. I got it to work as expected but its a lot of lines and I suspect it can be written far more efficently._
 
 ---
 
-## Final Entry – [Date]: Time Estimate
+## Final Entry – [4/14/26 ~ 11pm]: Time Estimate
 
 > Required. Estimate minutes spent per part. Honesty is expected; accuracy is not graded.
 
 | Part | Estimated Hours |
 |---|---|
 | Part 1: Problem Analysis | 30-45 min |
-| Part 2: Precomputation Design | 2-3 hr |
+| Part 2: Precomputation Design | 3 hr |
 | Part 3: Algorithm Correctness | 45min - 1hr |
 | Part 4: Search Design | 45min - 1hr |
-| Part 5: State and Search Space | |
-| Part 6: Pruning | |
-| Part 7: Implementation | |
-| README and DEVLOG writing | |
+| Part 5: State and Search Space | 3hr |
+| Part 6: Pruning | 2hr |
+| Part 7: Implementation | 30min |
+| README and DEVLOG writing | 1hr |
 | **Total** | |

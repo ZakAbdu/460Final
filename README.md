@@ -162,23 +162,23 @@ _Correct Dijkstra distances make the route planner compare relic orders using tr
 
 > Three bullets.
 
-- **What is tracked:** _Your answer here._
-- **When it is used:** _Your answer here._
-- **What it allows the algorithm to skip:** _Your answer here._
+- **What is tracked:** _The best complete route found so far, stored as the lowest fuel cost and the relic order that produced it._
+- **When it is used:** _It is checked before exploring deeper recursive brnaches._
+- **What it allows the algorithm to skip:** _Any partial route whose current cost is already greater than or equal to the best complete route._
 
 ### Part 6b: Lower Bound Estimation
 
 > Three bullets.
 
-- **What information is available at the current state:** _Your answer here._
-- **What the lower bound accounts for:** _Your answer here._
-- **Why it never overestimates:** _Your answer here._
+- **What information is available at the current state:** _The current location, relics still remaining, relics already visited, and fuel cost so far._
+- **What the lower bound accounts for:** _It accounts for fuel already spent on the partial route._
+- **Why it never overestimates:** _The cost so far is only part of the final route cost, so the complete route can only be the same or larger._
 
 ### Part 6c: Pruning Correctness
 
 > One to two bullets. Explain why pruning is safe.
 
-- _Your answer here._
+- _Pruning is safe because if the cost so far is already at least the best complete cost, adding more travel cannot make that route cheaper. Therefore, that branch cannot contain the optimal solution._
 
 ---
 

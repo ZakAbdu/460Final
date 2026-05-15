@@ -225,7 +225,7 @@ def find_optimal_route(dist_table, spawn, relics, exit_node):
                 if route_cost < best_cost:
                     best_cost = route_cost
                     best_order = route_order
-                    
+
                 #backtrack
                 ordered_relic_list.pop()
                 collected_relics.remove(relic)
@@ -258,15 +258,37 @@ def _explore(dist_table, current_loc, relics_remaining, relics_visited_order,
     -------
     None
         Updates best in place.
-
-    TODO
     Implement: base case, pruning, recursive case, backtracking.
 
     REQUIRED: Add a 1-2 sentence comment near your pruning condition
     explaining why it is safe (cannot skip the optimal solution).
     This comment is graded.
     """
-    pass
+    if cost_so_far >= best[0]:
+        return
+    
+    # Base case: no relics left, so go to the exit
+    if len(relics_remaining) == 0:
+        total_cost = cost_so_far + dist_table[current_loc][exit_node]
+
+        if total_cost < best[0]:
+            best[0] = total_cost
+            best[1] = relics_visited_order.copy()
+
+        return
+    
+    for relic in list(relics_remaining):
+        relics_remaining.remove(relic)
+        relics_visited_order.append(relic)
+
+        _explore(
+            dist_table, relic, relics_remaining, relics_visited_order, cost_so_far + dist_table[current_loc][relic],
+            exit_node, best
+        )
+
+        relics_visited_order.pop()
+        relics_remaining.add(relic)
+
 
 
 # =============================================================================
@@ -288,9 +310,10 @@ def solve(graph, spawn, relics, exit_node):
         (minimum_fuel_cost, ordered_relic_list)
         Returns (float('inf'), []) if no valid route exists.
 
-    TODO
     """
-    pass
+    dist_table = precompute_distances(graph, spawn, relics, exit_node)
+    return find_optimal_route(dist_table, spawn, relics, exit_node)
+    
 
 
 # =============================================================================
@@ -298,79 +321,79 @@ def solve(graph, spawn, relics, exit_node):
 # Graders will run additional tests beyond these.
 # =============================================================================
 
-graph_1 = {
-        'S': [('B', 1), ('C', 2), ('D', 2)],
-        'B': [('D', 1), ('T', 1)],
-        'C': [('B', 1), ('T', 1)],
-        'D': [('B', 1), ('C', 1)],
-        'T': []
-    }
-spawn = "S"
-relics = ["B", "C", "D"]
-exit_node = "T"
-
-print(select_sources(spawn, relics, exit_node))
-print(run_dijkstra(graph_1, spawn))
-print(precompute_distances(graph_1, spawn, relics, exit_node))
-
-# def _run_tests():
-#     print("Running provided tests...")
-
-#     # Test 1: Spec illustration. Optimal cost = 4.
-#     graph_1 = {
+# graph_1 = {
 #         'S': [('B', 1), ('C', 2), ('D', 2)],
 #         'B': [('D', 1), ('T', 1)],
 #         'C': [('B', 1), ('T', 1)],
 #         'D': [('B', 1), ('C', 1)],
 #         'T': []
 #     }
-#     cost, order = solve(graph_1, 'S', ['B', 'C', 'D'], 'T')
-#     assert cost == 4, f"Test 1 FAILED: expected 4, got {cost}"
-#     print(f"  Test 1 passed  cost={cost}  order={order}")
+# spawn = "S"
+# relics = ["B", "C", "D"]
+# exit_node = "T"
 
-#     # Test 2: Single relic. Optimal cost = 5.
-#     graph_2 = {
-#         'S': [('R', 3)],
-#         'R': [('T', 2)],
-#         'T': []
-#     }
-#     cost, order = solve(graph_2, 'S', ['R'], 'T')
-#     assert cost == 5, f"Test 2 FAILED: expected 5, got {cost}"
-#     print(f"  Test 2 passed  cost={cost}  order={order}")
+# print(select_sources(spawn, relics, exit_node))
+# print(run_dijkstra(graph_1, spawn))
+# print(precompute_distances(graph_1, spawn, relics, exit_node))
 
-#     # Test 3: No valid path to exit. Must return (inf, []).
-#     graph_3 = {
-#         'S': [('R', 1)],
-#         'R': [],
-#         'T': []
-#     }
-#     cost, order = solve(graph_3, 'S', ['R'], 'T')
-#     assert cost == float('inf'), f"Test 3 FAILED: expected inf, got {cost}"
-#     print(f"  Test 3 passed  cost={cost}")
+def _run_tests():
+    print("Running provided tests...")
 
-#     # Test 4: Relics reachable only through intermediate rooms.
-#     # Optimal cost = 6.
-#     graph_4 = {
-#         'S': [('X', 1)],
-#         'X': [('R1', 2), ('R2', 5)],
-#         'R1': [('Y', 1)],
-#         'Y': [('R2', 1)],
-#         'R2': [('T', 1)],
-#         'T': []
-#     }
-#     cost, order = solve(graph_4, 'S', ['R1', 'R2'], 'T')
-#     assert cost == 6, f"Test 4 FAILED: expected 6, got {cost}"
-#     print(f"  Test 4 passed  cost={cost}  order={order}")
+    # Test 1: Spec illustration. Optimal cost = 4.
+    graph_1 = {
+        'S': [('B', 1), ('C', 2), ('D', 2)],
+        'B': [('D', 1), ('T', 1)],
+        'C': [('B', 1), ('T', 1)],
+        'D': [('B', 1), ('C', 1)],
+        'T': []
+    }
+    cost, order = solve(graph_1, 'S', ['B', 'C', 'D'], 'T')
+    assert cost == 4, f"Test 1 FAILED: expected 4, got {cost}"
+    print(f"  Test 1 passed  cost={cost}  order={order}")
 
-#     # Test 5: Explanation functions must return non-placeholder strings.
-#     for fn in [explain_problem, dijkstra_invariant_check, explain_search]:
-#         result = fn()
-#         assert isinstance(result, str) and result != "TODO" and len(result) > 20, \
-#             f"Test 5 FAILED: {fn.__name__} returned placeholder or empty string"
-#     print("  Test 5 passed  explanation functions are non-empty")
+    # Test 2: Single relic. Optimal cost = 5.
+    graph_2 = {
+        'S': [('R', 3)],
+        'R': [('T', 2)],
+        'T': []
+    }
+    cost, order = solve(graph_2, 'S', ['R'], 'T')
+    assert cost == 5, f"Test 2 FAILED: expected 5, got {cost}"
+    print(f"  Test 2 passed  cost={cost}  order={order}")
 
-#     print("\nAll provided tests passed.")
+    # Test 3: No valid path to exit. Must return (inf, []).
+    graph_3 = {
+        'S': [('R', 1)],
+        'R': [],
+        'T': []
+    }
+    cost, order = solve(graph_3, 'S', ['R'], 'T')
+    assert cost == float('inf'), f"Test 3 FAILED: expected inf, got {cost}"
+    print(f"  Test 3 passed  cost={cost}")
+
+    # Test 4: Relics reachable only through intermediate rooms.
+    # Optimal cost = 6.
+    graph_4 = {
+        'S': [('X', 1)],
+        'X': [('R1', 2), ('R2', 5)],
+        'R1': [('Y', 1)],
+        'Y': [('R2', 1)],
+        'R2': [('T', 1)],
+        'T': []
+    }
+    cost, order = solve(graph_4, 'S', ['R1', 'R2'], 'T')
+    assert cost == 6, f"Test 4 FAILED: expected 6, got {cost}"
+    print(f"  Test 4 passed  cost={cost}  order={order}")
+
+    # Test 5: Explanation functions must return non-placeholder strings.
+    for fn in [explain_problem, dijkstra_invariant_check, explain_search]:
+        result = fn()
+        assert isinstance(result, str) and result != "TODO" and len(result) > 20, \
+            f"Test 5 FAILED: {fn.__name__} returned placeholder or empty string"
+    print("  Test 5 passed  explanation functions are non-empty")
+
+    print("\nAll provided tests passed.")
 
 
-# if __name__ == "__main__":
-#     _run_tests()
+if __name__ == "__main__":
+    _run_tests()
